@@ -321,8 +321,14 @@ def python_launcher(job):
     main_file = job['main-file']
     if main_file[-3:] == '.py':
         main_file = main_file[:-3]
-    sys.stderr.write('Importing %s.py\n' % main_file)
-    module  = __import__(main_file)
+
+    sys.stderr.write('Importing %s.py\n' % str(main_file))
+    sys.stderr.write("Main file: %s\n"% str(main_file))
+    sys.stderr.write("job: %s \n"% str(job))
+    sys.stderr.write("params: %s\n"% str(params))
+    sys.stderr.write("Current path: %s\n"%os.getcwd())
+
+    module = __import__(main_file)
     sys.stderr.write('Running %s.main()\n' % main_file)
     result = module.main(job['id'], params)
 
